@@ -1,0 +1,170 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "process": true
+  },
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "curly": "warn",
+    "no-alert": "error",
+    "no-await-in-loop": "warn",
+    "no-caller": "error",
+    "no-console": "warn",
+    "no-constructor-return": "error",
+    "no-continue": "error",
+    "no-empty-function": "error",
+    "no-eq-null": "error",
+    "no-eval": "error",
+    "no-implicit-coercion": "error",
+    "no-implicit-globals": "error",
+    "no-invalid-this": "error",
+    "no-iterator": "error",
+    "no-label-var": "error",
+    "no-lone-blocks": "warn",
+    "no-lonely-if": "warn",
+    "no-loop-func": "error",
+    "no-multi-str": "error",
+    "no-negated-condition": "warn",
+    "no-new-func": "error",
+    "no-new-wrappers": "error",
+    "no-octal-escape": "error",
+    "no-proto": "error",
+    "no-return-assign": "warn",
+    "no-return-await": "warn",
+    "no-script-url": "error",
+    "no-self-compare": "error",
+    "no-shadow": "error",
+    "no-tabs": "warn",
+    "no-template-curly-in-string": "warn",
+    "no-undefined": "warn",
+    "no-unused-expressions": "error",
+    "no-use-before-define": "error",
+    "no-useless-concat": "error",
+    "no-useless-return": "error",
+    "no-var": "error",
+    "no-void": "error",
+    "radix": "error",
+    "require-atomic-updates": "error",
+    "require-await": "error",
+    "vars-on-top": "warn",
+    "complexity": [
+      "error",
+      18
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 100,
+        "comments": 100,
+        "tabWidth": 2
+      }
+    ],
+    "max-lines": [
+      "error",
+      {
+        "max": 500,
+        "skipBlankLines": true
+      }
+    ],
+    "max-lines-per-function": [
+      "error",
+      {
+        "max": 250,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ],
+    "max-params": [
+      "warn",
+      6
+    ],
+    "no-extra-parens": [
+      "warn",
+      "all",
+      {
+        "conditionalAssign": false,
+        "returnAssign": false,
+        "nestedBinaryExpressions": false
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "none"
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "vue/no-v-html": "off",
+    "vue/no-static-inline-styles": "off",
+    "vue/attribute-hyphenation": "off",
+    "vue/no-boolean-default": "off",
+    "vue/html-button-has-type": "warn",
+    "vue/component-name-in-template-casing": "error",
+    "vue/no-invalid-model-keys": "error",
+    "vue/no-restricted-props": "error",
+    "vue/no-unused-refs": "error",
+    "vue/no-useless-mustaches": "error",
+    "vue/v-on-function-call": "error",
+    "vue/no-constant-condition": "warn",
+    "vue/eqeqeq": "error",
+    "vue/array-bracket-newline": "warn",
+    "vue/array-bracket-spacing": "warn",
+    "vue/arrow-spacing": "warn",
+    "vue/block-spacing": "warn",
+    "vue/brace-style": "warn",
+    "vue/no-empty-pattern": "warn",
+    "vue/no-useless-concat": "warn",
+    "vue/func-call-spacing": "warn",
+    "vue/no-extra-parens": "warn",
+    "vue/no-sparse-arrays": "warn",
+    "vue/prefer-template": "warn",
+    "vue/template-curly-spacing": "warn",
+    "vue/html-self-closing": [
+      "warn",
+      {
+        "html": {
+          "void": "any",
+          "normal": "always",
+          "component": "always"
+        }
+      }
+    ],
+    "vue/max-len": [
+      "warn",
+      {
+        "code": 100,
+        "template": 100,
+        "tabWidth": 2,
+        "comments": 100,
+        "ignorePattern": "",
+        "ignoreComments": false,
+        "ignoreTrailingComments": false,
+        "ignoreUrls": false,
+        "ignoreStrings": false,
+        "ignoreTemplateLiterals": false,
+        "ignoreRegExpLiterals": false,
+        "ignoreHTMLAttributeValues": false,
+        "ignoreHTMLTextContents": false
+      }
+    ]
+  }
+}

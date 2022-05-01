@@ -1,0 +1,39 @@
+{
+  "name": "c4-links-vuejs-utilities",
+  "version": "1.0.0",
+  "description": "Utilities library for VueJS 3 with ready to use components for Carrefour links projects",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "jest --verbose"
+  },
+  "author": "Carrefour Links",
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-plugin-router": "~4.5.15",
+    "@vue/cli-service": "^4.5.15",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
+    "core-js": "^3.6.5",
+    "dayjs": "^1.10.7",
+    "lodash-es": "^4.17.21",
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "jest": "^26.6.3",
+    "sass": "^1.27.0",
+    "sass-loader": "^10.0.3",
+    "tailwindcss": "^1.9.2",
+    "v-calendar": "^3.0.0-alpha.2",
+    "vue": "^3.0.0",
+    "vue-gtm": "^3.4.0",
+    "vue-router": "^4.0.0-0",
+    "vue-jest": "^5.0.0-0",
+    "vue-svg-inline-loader": "^1.5.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
