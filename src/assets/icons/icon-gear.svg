@@ -1,0 +1,11 @@
+<svg
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 561 561"
+fill-rule="evenodd"
+clip-rule="evenodd"
+shape-rendering="geometricPrecision"
+text-rendering="geometricPrecision"
+image-rendering="optimizeQuality"
+>
+<path d="M332 69c22 5 43 14 62 26l68-30 35 35-30 67c11 19 20 40 25 62l69 27v49l-69 27c-5 22-14 43-25 62l30 68-35 35-68-30c-19 11-40 20-62 25l-27 69h-49l-27-69c-22-5-43-14-62-25l-67 30-35-35 30-68c-12-19-21-40-26-62L0 305v-49l69-27c5-22 14-43 26-62l-30-67 35-35 67 30c19-12 40-21 62-26l27-69h49l27 69zm-51 121c50 0 90 41 90 91s-40 90-90 90-91-40-91-90 41-91 91-91z" />
+</svg>
