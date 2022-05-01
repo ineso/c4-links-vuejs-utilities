@@ -1,11 +1,13 @@
 <template>
   <div
     :class="className"
-    :style="{'background-color': backgroundColor, 'color': color}"
+    :style="{'background-color': backgroundColor,
+             'margin-left': marginLeft,'margin-bottom': marginBottom,
+             'color': color, 'width': toastWidth, 'border-color': `solid ${color}`}"
   >
     <span
       v-if="iconVisible"
-      class="alerticon"
+      class="toasticon"
       :style="{'color': iconColor}"
     >
       <InfoIcon
@@ -21,12 +23,11 @@
         :style="{width: iconSize, height: 'auto', fill: 'currentColor'}"
       />
     </span>
-    <details :style="{flex: '1 1 auto'}">
-      <summary>{{ summary }}</summary>
-      <p>{{ details }}</p>
-    </details>
+    <div :style="{flex: '1 1 auto'}">
+      <span class="font-bold">{{ summary }}</span>
+      <div>{{ details }}</div>
+    </div>
     <span
-      v-if="closable"
       class="closebtn"
       @click="onClose"
     >
@@ -42,7 +43,7 @@ import HelpIcon from '../Icons/Help.vue'
 import DangerIcon from '../Icons/Danger.vue'
 
 export default {
-  name: 'Alert',
+  name: 'Toast',
   
   components: {
     InfoIcon,
@@ -60,20 +61,35 @@ export default {
       required: false,
       default: ''
     },
-    closable: {
-      type: Boolean,
-      required: false,
-      default: true
-    },
     backgroundColor: {
       type: String,
       required: false,
-      default: '#ff8888'
+      default: '#EEE'
     },
     color: {
       type: String,
       required: false,
-      default: '#EEE'
+      default: '#333'
+    },
+    marginLeft: {
+      type: String,
+      required: false,
+      default: '25%'
+    },
+    marginRight: {
+      type: String,
+      required: false,
+      default: '25%'
+    },
+    marginBottom: {
+      type: String,
+      required: false,
+      default: '3%'
+    },
+    toastWidth:{
+      type: String,
+      required: false,
+      default: '50%'
     },
     iconVisible: {
       type: Boolean,
@@ -83,12 +99,12 @@ export default {
     iconName: {
       type: String,
       required: false,
-      default: 'icon-danger'
+      default: 'icon-info'
     },
     iconColor: {
       type: String,
       required: false,
-      default: '#EEE'
+      default: '#333'
     },
     iconSize: {
       type: String,
@@ -101,12 +117,12 @@ export default {
     'close'
   ],
 
-  setup() {
+  setup(props) {
     const instance = getCurrentInstance()
-    const className = ref('alert show')
+    const className = ref('toast show')
 
     const onClose = () => {
-      className.value = 'alert hide'
+      className.value = 'toast hide'
       instance.emit('close', {})
     }
 
@@ -119,20 +135,27 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.alert {
+.toast {
   display: flex;
   align-items: flex-start;
-  padding: 20px;
-  margin-bottom: 2px;
+  min-width: 300px;
+  border: solid;
+  border-width: 0 5px 0 5px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 12px;
+  position: fixed;
+  z-index: 10;
 }
 
-.alerticon {
+.toasticon {
   align-self: center;
   margin-right: 12px;
   fill: currentColor;
 }
 
 .closebtn {
+  color: #333;
   margin-left: 12px;
   font-weight: bold;
   font-size: 25px;
@@ -146,52 +169,77 @@ export default {
 }
 
 .show {
-  -webkit-animation: fadein 1s;
-  animation: fadein 1s;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 .hide {
-  -webkit-animation: fadeout 1s;
-  animation: fadeout 1s;
+  -webkit-animation: fadeout 0.5s;
+  animation: fadeout 0.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes fadein {
-  from {
-    top: -100px;
+  from { 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
   }
   to {
-    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    opacity: 0.85;
   }
 }
 
 @keyframes fadein {
   from {
-    top: -100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
   }
   to {
-    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    opacity: 0.85;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
-    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    opacity: 0.85;
   }
   to {
-    top: -100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
   }
 }
 
 @keyframes fadeout {
   from {
-    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    opacity: 0.85;
   }
   to {
-    top: -100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
   }
 }
+
 </style>
