@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 
-import each from 'lodash-es/each'
 import get from 'lodash-es/get'
 import { ref, computed } from 'vue'
-import { storage, makeAPICall } from '../utils'
+import { makeAPICall } from '../utils'
 
 const user = ref({})
 const fetchUserLoading = ref(false)
@@ -21,13 +20,7 @@ const useUser = () => {
    * and clear session cookies.
    */
   const logout = () => {
-    const accessToken = storage.cookie.get('Carrefour-accessToken')
-    storage.cookie.del('Carrefour-accessToken')
-    storage.cookie.del('Carrefour-refreshToken')
-
-    window.location.href = process.env.VUE_APP_API_BASE_URL +
-      '/oidc/logout?authorization=' +
-      accessToken
+    window.location.href = process.env.VUE_APP_API_BASE_URL + '/oidc/logout'
   }
 
   /**
@@ -82,15 +75,6 @@ const useUser = () => {
    * @param {string} token the token to save.
    */
   const handleTokenReply = ({ token }) => {
-    const data = window.JSON.parse(window.atob(token))
-
-    each(['accessToken', 'refreshToken'], type => {
-      if (data[type]) {
-        storage.cookie.set(
-          [data.instanceId, type].join('-'), data[type].token, { maxAge: data[type].maxAge / 1000 }
-        )
-      }
-    })
     window.location.href = window.location.origin + window.location.pathname
   }
 
