@@ -1,34 +1,92 @@
-// Copyright Carrefour(2022)
-//
+/* eslint-disable no-console */
 
-const makeAPIFetch = (endpoint, params, options) => {
-  return fetch(process.env.VUE_APP_API_BASE_URL + endpoint, {
-    ...params,
-    credentials: 'include',
-    body: params.body ? JSON.stringify(params.body) : null,
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      ...params.headers || {}
-    })
-  })
-}
+import get from 'lodash-es/get'
+import { ref, computed } from 'vue'
+import { makeAPICall } from '../utils'
+
+const user = ref({})
+const fetchUserLoading = ref(false)
+const isLogged = computed(() => user.value && Object.keys(user.value).length > 0)
 
 /**
- * Performs an Ajax internal API call.
+ * Returns a set of functions to manage user.
  * 
- * @param {string} endpoint the API call endpoint.
- * @param {Object} [params={}] optinal parameters.
- * @param {boolean} [catch498=true] optional parameter to refresh token is necessary.
- * @returns {Promise<Object|Object[]>} the output data from the API call.
+ * @return {Object} functions to manage user.
  */
-const makeAPICall = (endpoint, params = {}, { catch498 = true } = {}) => {
-  return makeAPIFetch(endpoint, params, { catch498 }).then(response => {
-    if (response.ok) {
-      return response.json()
+const useUser = () => {
+
+  /**
+   * Logout the current user, redirect to the logout page
+   * and clear session cookies.
+   */
+  const logout = () => {
+    window.location.href = process.env.VUE_APP_API_BASE_URL + '/oidc/logout'
+  }
+
+  /**
+   * Login the current user, redirect to the login page
+   * 
+   */
+  const login = () => {
+    window.location.href = process.env.VUE_APP_API_BASE_URL + '/oidc/login'
+  }
+
+  /**
+   * Fetch the user information and credentials.
+   * 
+   * @returns {Promise<Object>} the user credentials.
+   */
+  const fetchUser = () => {
+    fetchUserLoading.value = true
+
+    return makeAPICall('/me', {
+      method: 'GET'
+    }).catch(err => {
+      console.warn(err)
+    }).then(resp => {
+      return resp
+    }).finally(() => {
+      fetchUserLoading.value = false
+    })
+  }
+
+  /**
+   * Returns the user information and credentials.
+   * If not already in cache call the fetch function.
+   * 
+   * @returns {Promise<Object>} the user credentials.
+   */
+  const getUser = async () => {
+    if (!isLogged.value) {
+      try {
+        const response = await fetchUser()
+        user.value = get(response, 'data', {})
+      } catch (err) {
+        console.warn(err)
+      }
     }
-    return Promise.reject(response)
-  })
+
+    return user.value
+  }
+
+  /**
+   * Manage session cookies when auth redirection is done.
+   * 
+   * @param {string} token the token to save.
+   */
+  const handleTokenReply = ({ token }) => {
+    window.location.href = window.location.origin + window.location.pathname
+  }
+
+  return {
+    logout,
+    login,
+    handleTokenReply,
+    getUser,
+    isLogged,
+    user,
+    fetchUserLoading
+  }
 }
 
-export default makeAPICall
+export default useUser
