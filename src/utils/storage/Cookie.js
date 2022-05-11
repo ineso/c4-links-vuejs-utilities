@@ -5,7 +5,7 @@ import Storage from './Storage'
 
 export default class Cookie extends Storage {
   set (key, value, options = {}) {
-    const name = this.prefix + key
+    const name = (this.prefix || '') + key
     const maxAge = options.maxAge || 60 * 60 * 24 * 365
     document.cookie = name + '=' + value +
       '; max-age=' + maxAge +
@@ -14,7 +14,7 @@ export default class Cookie extends Storage {
   }
 
   get (key) {
-    const name = this.prefix + key
+    const name = (this.prefix || '') + key
     const nameEQ = name + '='
     const ca = document.cookie.split(';')
     for (let i = 0; i < ca.length; i++) {
@@ -30,7 +30,7 @@ export default class Cookie extends Storage {
   }
 
   del (key) {
-    const name = this.prefix + key
+    const name = (this.prefix || '') + key
 
     this.set(name, '', -1)
   }
